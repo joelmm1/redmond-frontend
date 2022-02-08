@@ -1,0 +1,36 @@
+:host {
+        @apply block max-w-6xl mx-auto;
+        ::ng-deep {
+                .flickity-page-dots {
+                        margin-bottom: -3.5em;
+                        text-align: center;
+                        top: auto;
+                        .dot {
+                                background: rgba(0,0,0,.23);
+                                &.is-selected, &:hover {
+                                        background: #ED4447 !important;
+                                }
+                        }
+                        
+                }
+        }
+}
+::ng-deep {
+        .carousel {
+                &:after {
+                        content: 'flickity' !important;
+                        display: none !important;
+                }
+        }
+        .disable-flickity {
+                .carousel {
+                        &:after {
+                                content: '' !important;
+                        }
+                        .slide {
+                                @apply mb-3
+                        }
+                }
+        }
+        
+}

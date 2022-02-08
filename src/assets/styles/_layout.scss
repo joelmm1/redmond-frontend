@@ -1,0 +1,18 @@
+.fullwidth {
+        width: 100vw;
+	margin-left: calc(-50vw + 50%);
+	position: relative;
+}
+.ck-editor {
+	border: 0 !important;
+}
+.ck-content {
+	border: 0 !important;
+}
+.ck-editor__top {
+	display: none;
+}
+
+.grid-blocks {
+	grid-template-columns: min-content !important;
+}

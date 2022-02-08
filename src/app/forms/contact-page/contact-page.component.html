@@ -1,0 +1,55 @@
+
+<mat-button-toggle-group [value]="!!!activeForm ? 'general' : activeForm"
+        (change)="activeForm = $event.value"
+        class="max-w-[420px] w-full border-0 mt-10 mb-5 mx-auto flex flex-nowrap">
+        <mat-button-toggle 
+                [ngClass]="['border-b border-l-0 border-r-0 border-t-0 w-4/12 rounded-none']"
+                [checked]="activeForm === 'general'" [value]="'general'">General</mat-button-toggle>
+        <mat-button-toggle 
+                [ngClass]="['border-b border-l-0 border-r-0 border-t-0 w-4/12 rounded-none']"
+                [checked]="activeForm === 'hiring'" [value]="'hiring'">Careers</mat-button-toggle>
+        <mat-button-toggle 
+                [ngClass]="['border-b border-l-0 border-r-0 border-t-0 w-4/12 rounded-none']"
+                [checked]="activeForm === 'subcontractors'" [value]="'subcontractors'">Subcontractors</mat-button-toggle>
+</mat-button-toggle-group>
+
+<div [ngSwitch]="activeForm"
+        class="max-w-3xl w-full mx-auto">
+        <div class="inquire-jobs grid grid-cols-1 sm:grid-cols-2 gap-10" 
+                *ngSwitchCase="'hiring'">
+                <div class="col-span-full">
+                        <h2 *ngIf="!!hiring && !!hiring.title"
+                                class="text-3xl text-center my-3 w-full">{{ hiring.title }}</h2>
+                </div>
+                <ng-template [ngIf]="!!jobs">
+                
+                        <div class="p-6 sm:p-8 rounded border border-gray-200">
+                                <small class="text-rcc-red">Currently hiring for:</small>
+                                <mat-accordion class="border-0">
+                                        <mat-expansion-panel *ngFor="let job of jobs"
+                                                class="border-l-0 border-r-0 border-t-0 rounded-none"
+                                                (opened)="scrollToOpenPanel()">
+                                                <mat-expansion-panel-header class="pl-0">
+                                                        <h3 class="job-title">{{job.title}}</h3>
+                                                </mat-expansion-panel-header>
+                                                <div class="job-content" [innerHTML]="job.content | safeHtml"></div>
+                                        </mat-expansion-panel>
+                                </mat-accordion>
+                        </div>
+                        <app-contact-forms 
+                                class="max-w-[420px] mx-auto px-3 py-4 rounded border border-gray-100"
+                                formKey="jobs" [jobs]="jobs"
+                                (submitted)="formSubmitted($event)"></app-contact-forms>
+                </ng-template>
+        </div>
+        <div *ngSwitchCase="'subcontractors'"
+                class="iquire-default max-w-[420px] mx-auto px-3 py-4 rounded border border-gray-100">
+                <app-contact-forms formKey="subcontractors"
+                        (submitted)="formSubmitted($event)"></app-contact-forms>
+        </div>
+        <div *ngSwitchDefault
+                class="iquire-default max-w-[420px] mx-auto px-3 py-4 rounded border border-gray-100">
+                <app-contact-forms formKey="general"
+                        (submitted)="formSubmitted($event)"></app-contact-forms>
+        </div>
+</div>

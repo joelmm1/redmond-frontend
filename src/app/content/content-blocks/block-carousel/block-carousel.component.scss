@@ -1,0 +1,111 @@
+:host {
+        @apply w-full block;
+        ::ng-deep {
+                .card-content {
+                        width: 90%;
+                        max-width: 640px;
+                }
+                .carousel-hero .image-overlay {
+                        @apply opacity-100 z-0;
+                        background: rgba(9, 12, 19, 0.3);
+                        background: linear-gradient(
+                                180deg,
+                                rgba(9, 12, 19, 0.6) 0%,
+                                rgba(18, 25, 40, 0.1) 20%,
+                                rgba(15, 21, 33, 0) 50%,
+                                rgba(14, 19, 30, 0) 70%,
+                                rgba(18, 25, 40, 0.6) 100%
+                        ) !important;
+                }
+        }
+}
+
+::ng-deep {
+        app-block-carousel:not(.disable-flickity) {
+                .carousel {
+                        .slide {
+                                margin: 0 1em;
+                                @apply w-[calc(100%-1em)];
+                                @media screen and (max-width: 640px) {
+                                        height: 90vw;
+                                        app-card {
+                                                height: 100%;
+                                                .gg-card,
+                                                .image,
+                                                .image-wrapper {
+                                                        height: 100% !important;
+                                                }
+                                        }
+                                        img {
+                                                height: 100% !important;
+                                                width: auto !important;
+                                        }
+                                }
+                                @media screen and(max-width: 480px) {
+                                        height: 110vw;
+                                }
+                        }
+                }
+        }
+        .disable-flickity {
+                .slide {
+                        margin-left: auto !important;
+                        margin-right: auto !important;
+                }
+        }
+
+        .carousel.is-fullscreen .carousel-cell {
+                @apply h-full;
+        }
+        .flickity-page-dots {
+                @apply text-right pr-6;
+                @apply bottom-6;
+                .dot {
+                        @apply bg-white transform scale-100 my-0 mx-2;
+                        @apply transition-all ease-in-out duration-200 transform opacity-40;
+                        @apply hover:shadow-2xl hover:opacity-100 hover:scale-150;
+                }
+        }
+
+        .flickity-prev-next-button {
+                width: 10% !important;
+                min-width: 100px;
+                @apply p-0 text-center appearance-none rounded-sm top-0 my-auto h-full bottom-0 items-center flex text-white bg-transparent w-10 focus:border-0 focus:ring-0 active:ring-0 active:border-0 hover:bg-transparent;
+
+                svg {
+                        height: 2.5rem !important;
+                        width: 2.5rem !important;
+                        top: calc(50%-20px) !important;
+                        @apply left-0 right-[50%] transform translate-x-[50%] w-8 h-8 sm:h-10 sm:w-10 p-0 m-auto rounded-sm appearance-none transition-all duration-200 ease-in-out;
+                        @apply my-auto;
+                }
+                &:hover {
+                        background-color: transparent;
+                        svg {
+                                @apply text-rcc-red;
+                        }
+                }
+                &.previous {
+                        margin-left: 0.5em;
+                        @apply left-0 ml-1 transform translate-x-0 translate-y-0;
+                }
+                &.next {
+                        margin-right: 0.5em;
+                        @apply right-0 transform translate-x-0 translate-y-0;
+                }
+        }
+        .carousel:after {
+                content: "flickity";
+                display: none;
+        }
+        .disable-flickity {
+                .carousel:after {
+                        content: "" !important;
+                }
+        }
+        app-content-blocks > app-block-carousel .carousel {
+                .slide {
+                        margin: 0 !important;
+                }
+        }
+}

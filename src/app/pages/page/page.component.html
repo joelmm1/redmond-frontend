@@ -1,0 +1,19 @@
+<ng-template [ngIf]="!!doc$">
+        <div *ngIf="doc$ | async as doc">
+
+                <ng-template #pageHeading let-title="title" let-description="description">
+                        <app-page-header class="page-heading mb-4"
+                                *ngIf="!!title?.length">
+                        <h1 class="header-title">{{title}}</h1>
+                                <h4 class="header-text">{{description}}</h4>
+                        </app-page-header>
+                </ng-template>
+                
+
+                <app-content-blocks
+                        *ngIf="!!doc?.blocks?.length"
+                        [doc]="doc"></app-content-blocks>
+
+        </div>
+
+</ng-template>

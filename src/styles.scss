@@ -1,0 +1,53 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+/* You can add global styles to this file, and also import other style files */
+@layer base {
+         h1, h2, h3, h4, h5, h6, p, i {
+                @apply prose font-sans leading-snug ;
+        }
+        h1 {
+                @apply text-2xl lg:text-3xl font-medium tracking-wide;
+        }
+        h2 {
+                @apply text-xl lg:text-2xl font-medium tracking-wide;
+        }
+        h3 {
+                @apply text-lg lg:text-xl font-semibold tracking-wider;
+        }
+        h4 {
+                @apply text-base lg:text-lg font-medium tracking-wide;
+        }
+        h5 {
+                @apply text-base font-bold tracking-wider;
+        }
+        h6, i {
+                @apply text-base font-light;
+        }
+        p {
+                @apply text-base font-medium;
+        }
+        a {
+                text-decoration: inherit;
+        }
+        ul {
+                list-style: disc;
+                @apply my-2 pl-4 list-disc;
+        }
+        ol {
+                list-style: decimal;
+                @apply my-2 pl-4 list-decimal;
+        }
+}
+
+
+html,body, app-shell {
+        width: 100vw;
+        overflow-scroll-x: hidden;
+        min-height: 100vh;
+        touch-action: pan-y !important;
+}
+html * {
+        font-family: sofia-pro, Arial, Helvetica, sans-serif;
+}
+

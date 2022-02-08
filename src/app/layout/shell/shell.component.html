@@ -1,0 +1,30 @@
+
+
+<app-header #appHeader
+        [ngClass]="[
+                'min-w-full max-w-full md:min-w-full pl-0 pr-0 md:pl-3 md:pr-3 sm:pl-2 sm:pr-2 xl:mx-auto xl:min-w-auto xl:max-w-4xl xl:left-auto xl:right-auto left-0 right-0 block fixed inset-x-0 top-0 bottom-auto mx-auto',
+                !!overlayNav ? 'overlay-nav' : '',
+                !!scrolled ? 'bg-white' : ''
+        ]"
+        [style.box-shadow]="scrolled || !overlayNav ? '10px 0 0 white, -10px 0 0 white' : 'none'"
+        style="z-index: 999 !important"
+        [scrolled]="scrolled"
+        [overlayNav]="overlayNav"
+        [isHomePage]="isHomePage">
+</app-header>
+
+<main #mainContent
+        [ngClass]="['mx-auto px-0',
+                (appHeader.isHandset$ | async) ? 'is-handset' : '',
+                overlayNav ? '0' : scrolled ? 'mt-4' : 'mt-10'
+        ]"
+        [style.padding-right]="scrollbarWidth">
+        
+                <ng-content></ng-content>
+        
+</main>
+
+<footer class="w-screen overflow-x-hidden block mx-auto mt-20">
+        <app-footer class="w-full flex flex-wrap sm:flex-nowrap content-between items-start mt-8 md:mt-16 lg:mt-22 py-6 px-3"></app-footer>
+</footer>
+

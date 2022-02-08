@@ -1,0 +1,12 @@
+app-page-header, [header-title] {
+        @apply text-2xl md:text-3xl lg:text-4xl leading-snug mb-3 sm:mb-auto;
+}
+
+.section-title {
+        @apply sm:text-base lg:text-lg tracking-widest uppercase font-bold text-grey-dark py-6 sm:py-8 lg:py-10 xl:py-12;
+}
+
+
+.project-card-title {
+        @apply prose text-white mb-1 text-lg sm:text-xl md:text-2xl xl:text-3xl tracking-widest leading-normal w-10/12 ml-2;
+}

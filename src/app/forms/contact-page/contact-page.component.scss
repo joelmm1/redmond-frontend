@@ -1,0 +1,37 @@
+
+    :host {
+            @apply flex flex-col w-full;
+    }
+    .inquire-jobs {
+    }
+    .mat-expansion-panel {
+            @apply border border-gray-200;
+            &.mat-expanded {
+                    @apply shadow-md;
+                    .job-title {
+                            @apply text-rcc-red;
+                    }
+            }
+            &:not(.mat-expanded) {
+                    @apply shadow-none;
+            }
+    }
+    :host {
+            ::ng-deep {
+                    .job-content {
+                            p, ul, h1, h2, h3, h4, h5, h6 {
+                                    @apply my-2;
+                            }
+                            h1, h2, h3, h4, h5, h6 {
+                                    @apply mt-4;
+                            }
+                    }
+                    mat-button-toggle-group {
+                            mat-button-toggle {
+                                    &.mat-button-toggle-checked {
+                                            @apply font-extrabold border-rcc-red bg-transparent text-rcc-red ;
+                                    }
+                            }
+                    }
+            }
+    }

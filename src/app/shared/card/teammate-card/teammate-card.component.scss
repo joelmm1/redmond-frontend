@@ -1,0 +1,10 @@
+:host {
+        [card-image] {
+                @apply overflow-hidden;
+        }
+        ::ng-deep {
+                .card-content {
+                        padding: 0 !important;
+                }
+        }
+}

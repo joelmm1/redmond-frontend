@@ -1,0 +1,22 @@
+<div *ngIf="doc$ | async as doc" class="page-content">
+
+        <div class="project-details flex flex-col sm:flex-row sm:flex-nowrap align-start sm:align-center content-start w-full py-6 pb-3">
+                <h1 class="section-title capitalize prose my-auto mr-4 text-left text-xl lg:text-2xl py-0">
+                        {{doc.title}}
+                </h1>
+                <ul class="flex px-0 mx-0 sm:mr-auto sm:ml-4 my-auto py-1 text-sm text-grey-lighter flex-row justify-self-center flex-nowrap sm:align-items-center sm:space-x-4 w-4/12">
+                        <li class="sector flex items-center prose text-grey-dark text-base text-light" *ngIf="!!sectorMap && !!sectorMap[doc.sector]">
+                                <i class="gicon gicon-sector text-rcc-red transform scale-75 mr-1 relative"></i> <i class="text-sm whitespace-nowrap lowercase font-medium">{{ sectorMap[doc.sector] }}</i>
+                        </li>
+                        <li class="location flex items-center prose text-grey-dark text-base text-light">
+                                <i class="gicon gicon-location text-rcc-red transform scale-75 mr-1 relative"></i>  <small class="text-sm whitespace-nowrap">{{ doc.location.city }}{{ !!doc.location && !!doc.location.state ? ', ' +  doc.location.state : '' }}</small>
+                        </li>
+                </ul>
+        </div>
+
+        <app-block-carousel
+                *ngIf="!!doc"
+                [block]="doc"
+                [ngClass]="(verticalDevice$ | async) ? 'disable-flickity' : ''"></app-block-carousel>
+
+</div>

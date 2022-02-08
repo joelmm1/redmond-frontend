@@ -1,0 +1,32 @@
+<ng-template #loading>
+        <app-loading-element></app-loading-element>
+</ng-template>
+
+        <div *ngIf="doc$ | async as doc"
+                class="page-content flex flex-nowrap content-center items-start">
+                
+                        <div  *ngIf="!!prevPost && !!prevPost.handle"
+                                [ngClass]="[!!prevPost && !!prevPost.handle ? '' : 'hidden', 'next-prev-post cursor-pointer flex items-center text-grey-dark hover:text-rcc-red focus:outline-0 fixed top-0 h-screen left-0 transform scale-75 md:scale-100 md:left-[10%] right-auto appearance-none']"
+                                (click)="navigateNextPrevPost(prevPost.handle)">
+                                <i style="color: inherit" class="gicon gicon-chevron-left text-4xl md:text-4xl"></i>
+                        </div>
+                <div [ngClass]="['post max-w-md mx-auto flex flex-col content-start transition quick-in duration-500'] ">
+                        <div class="image"  *ngIf="!!doc.image">
+                                <img imageLoader 
+                                        [image]="!!doc.image ? doc.image : !!doc?.images?.length ? doc.images[0] : null"
+                                        [thumbs]="!!doc.image && !!doc.image.thumbs ? doc.image.thumbs : null"
+                                        [attr.src]="doc.image | smallestThumb" />
+                        </div>
+                        <div class="px-2" *ngIf="!!doc.content">
+                                <h1 class="post-title font-bold text-2xl sm:text-4xl md:text-5x xl-text-6xl leading-normal text-capitalize my-4">{{ doc.title }}</h1>
+                                <div class="post-content">
+                                        <app-wysiwyg-editor [data]="doc.content" [readOnly]="true"></app-wysiwyg-editor>
+                                </div>
+                        </div>
+                </div>
+                        <div  *ngIf="!!nextPost && !!nextPost.handle"
+                                [ngClass]="['next-prev-post cursor-pointer flex items-center text-grey-dark hover:text-rcc-red focus:outline-0 fixed top-0 h-screen right-0 transform scale-75 md:scale-100 md:right-[10%] left-auto appearance-none']"
+                                (click)="navigateNextPrevPost(nextPost.handle)">
+                                        <i style="color: inherit" class="gicon gicon-chevron-right text-4xl md:text-4xl"></i>
+                        </div>
+        </div>

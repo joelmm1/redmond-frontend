@@ -1,0 +1,12 @@
+
+
+<ckeditor *ngIf="!!Editor; else basicContent"
+        [editor]="Editor" 
+        [config]="config"
+        [disabled]="true"
+        [data]="data"
+        (ready)="onReady($event)"></ckeditor>
+
+<ng-template #basicContent>
+        <div [innerHTML]="data | safeHtml"></div>
+</ng-template>

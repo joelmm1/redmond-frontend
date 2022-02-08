@@ -1,0 +1,57 @@
+<ng-content select="[before-carousel]"></ng-content>
+<ng-template [ngIf]="!!slides?.length">
+
+        <div bc-flickity="{{flickityOptions}}"
+                [attr.id]="carouselId"
+                [ngClass]="['carousel w-full min-w-full mx-0', isHero ? 'carousel-hero' : '']">
+                <ng-template [ngIf]="isBrowser" [ngIfElse]="carouselContent">
+                        <ng-container *ngTemplateOutlet="carouselContent"></ng-container>
+                </ng-template>
+        </div>
+        
+        <ng-template #carouselContent>
+                <ng-template [ngIf]="imageSlides" [ngIfElse]="contentSlides">
+                        <div class="slide h-auto px-0 first-letter:max-w-[1400px]" 
+                                *ngFor="let slide of slides">
+                                <img *ngIf="slide"
+                                        class="w-full h-auto"
+                                        imageLoader
+                                        [attr.src]="slide | smallestThumb"
+                                        [attr.data-flickity-lazyload]="!!slide.src ? slide.src : !!slide.image ? !!slide.image.src ? slide.image.src : slide.image : slide"
+                                        [thumbs]="!!slide.thumbs ? slide.thumbs : !!slide.image?.thumbs ? slide.image.thumbs : null"
+                                        [image]="!!slide.src ? slide : !!slide.image ? slide.image : null"
+                                        alt="" />
+                        </div>
+                </ng-template>
+
+                <ng-template #contentSlides>
+                        <div class="slide carousel-cell w-full"
+                                #contentSlide
+                                *ngFor="let slide of slides">
+                                <app-block-card
+                                        #cardBlock
+                                        [ngClass]="['h-full', contentSlide.offsetWidth > contentSlide.offsetHeight ? 'w-full' : 'h-full w-auto',
+                                                'w-full'
+                                        ]"
+                                        [block]="slide"
+                                        [aspectRatio]="block.aspectRatio"
+                                        [revealOnHover]="true"
+                                        [cardStyle]="'overlay'">
+                                        <span *ngIf="!!slide?.title?.length" class="block-title w-100 block relative">
+                                                {{ slide.title }}
+                                        </span>
+
+                                        <span *ngIf="!!slide?.text?.length" class="block-text w-100 block relative">
+                                                {{ slide.text }}
+                                        </span>
+
+                                        <span *ngIf="!!slide?.linkText?.length" class="block-link-text w-100 block relative">
+                                                {{ slide.linkText }}
+                                        </span>
+                                        
+                                </app-block-card>
+                        </div>
+                </ng-template>
+        </ng-template>
+        
+</ng-template>

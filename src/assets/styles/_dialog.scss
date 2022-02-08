@@ -1,0 +1,32 @@
+
+mat-dialog-container {
+        @apply bg-white shadow-xl rounded relative;
+}
+
+mat-dialog-content {
+        max-height: 100vh !important;
+}
+
+.view-teammate-dialog { 
+        mat-dialog-container {
+                overflow: hidden;
+        }
+}
+.view-project-dialog-backdrop {
+        @apply opacity-90 bg-gradient-to-b from-gray-50 to-gray-300;
+}
+.view-project-dialog {
+        @apply block w-full bg-white;
+        .mat-dialog-container {
+                @apply p-0;
+        }
+        box-shadow: 0 10px 13px -6px rgba(255,255,255,.5),
+                        0 20px 31px 3px rgba(255,255,255,.5),
+                        0 8px 38px 7px rgba(255,255,255,.5);
+}
+.select-entity-dialog {
+        mat-dialog-content {
+                @apply px-3 py-2 rounded-lg;
+        }
+        
+}

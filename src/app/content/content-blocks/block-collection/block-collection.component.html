@@ -1,0 +1,57 @@
+<div class="collection-title mb-6" *ngIf="!!block?.title">
+        <a *ngIf="!!block?.link"
+                class="flex items-center content-start"
+                [routerLink]="[block.link === '/' ? '/' : block.link ]">
+                <h2 class="block-collection-title"
+                        *ngIf="!!block?.title">{{ block.title }}</h2>
+                <i class="gicon gicon-angle-right my-auto leading-none ml-4"></i>
+        </a>
+        <h2 *ngIf="!!!block?.link"
+                class="block-collection-title">{{ block.title }}</h2>
+</div>
+
+
+
+<div *ngIf="!!docs?.length"
+        [ngClass]="['grid', !!block?.classes?.content ? block?.classes?.content : '', !!block?.classes?.columns ? block?.classes?.columns : '',  !!block?.classes?.spacing ? block?.classes?.spacing : '']">
+        <ng-template ngFor let-doc [ngForOf]="docs" let-i="index">
+
+                <app-team-card *ngIf="doc.type === 'team'"
+                        [doc]="doc"></app-team-card>
+
+                <app-project-card *ngIf="doc.type === 'project'"
+                        [doc]="doc"
+                        [aspectRatio]="!!block.aspectRatio ? block.aspectRatio : '5:4'"></app-project-card>
+
+                <app-post-card *ngIf="doc.type === 'post'"
+                        [doc]="doc"
+                        [aspectRatio]="!!block.aspectRatio ? block.aspectRatio : '5:4'"></app-post-card>
+
+                <ng-template [ngIf]="!!!doc?.type || !['team', 'project', 'post'].includes(doc.type)">
+                        <ng-container *ngTemplateOutlet="collectionItem; context: { doc: doc, i: i }"></ng-container>
+                </ng-template>
+                
+        </ng-template>
+</div>
+
+
+<ng-template #collectionItem let-doc="doc" let-i="i">
+        
+        <app-card  cardStyle="overlay"
+                [aspectRatio]="'5:4'" 
+                class="w-full bg-cover bg-center relative">
+                <h5 card-before *ngIf="!!doc.category"
+                        class="absolute top-2 left-4 z-50 uppercase tracking-wider text-white font-bold">
+                        {{ doc.category }}
+                </h5>
+                <div card-image class="h-full flex items-center image-wrapper bg-cover bg-center">
+                        <img imageLoader="theImage"
+                                [aspectRatio]="'5:4'"
+                                [thumbs]="!!doc.image && !!doc.image.thumbs ? doc.image.thumbs : !!doc.images && !!doc.images[0]?.src ? doc.images[0].src : null"
+                                [attr.src]="(!!doc.image ? doc.image : doc) | smallestThumb"
+                                [isBackground]="true"
+                                class="w-full h-auto object-cover object-center text-white flex-shrink-1 min-w-full min-h-full"
+                                />
+                </div>
+        </app-card>
+</ng-template>

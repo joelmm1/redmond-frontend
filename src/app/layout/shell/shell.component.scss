@@ -1,0 +1,47 @@
+:host {
+        @apply w-full overflow-x-hidden block mx-0 px-0 z-50 -mt-px;
+        &:not(.has-overlay-nav) {
+                        main,
+                        footer,
+                        app-header {
+                                @apply px-2 2xl:max-w-screen-xl max-w-[calc(100%-1em)] md:max-w-[calc(100%-2em)] mx-auto;
+                                .header-title {
+                                        @apply pr-3 my-auto mr-0;
+                                }
+                                .header-text  {
+                                        @apply ml-0 my-auto mr-auto pl-0;
+                                }
+                        }
+                }
+}
+::ng-deep {
+        main {
+                min-height: 70vh;
+                @apply my-0 p-0 mx-auto w-screen max-w-screen min-w-screen overflow-hidden;
+        }
+        .page-content {
+                @apply sm:w-[calc(100vw-2em)] md:w-[calc(100vw-3em)] lg:w-[calc(100vw-4em)] max-w-5xl mx-auto;
+                width: calc(100% - 1.6em) !important;
+        }
+        .home-page {
+                &.page-content {
+                        @apply min-w-screen w-screen max-w-screen;
+                }
+                @media screen and (max-width: 640px) {
+                        .swiper {
+                                min-height: 75vw !important;
+                        }
+                        .swiper img {
+                                min-height: 75vw !important;
+                        }
+                }
+                @media screen and (max-width: 480px) {
+                        .swiper {
+                                min-height: 100vw !important;
+                        }
+                        .swiper img {
+                                min-height: 100vw !important;
+                        }
+                }
+        }
+}
